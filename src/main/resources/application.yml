@@ -2,23 +2,22 @@ spring:
   datasource:
     druid:
       filters: stat,wall,WebStat #开启监控
-      aop-patterns: com.gsj.controller.DemoController.*
+      aop-patterns: com.gsj.controller.DemoController.*  #自定义监控 切面 多个用逗号隔开
       web-stat-filter:
         enabled: true
-        url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-        session-stat-enable: t
-        principal-cookie-name: JSESSIONID
+        url-pattern: /*   #监控所有目录
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 屏蔽web拦截器
+        session-stat-enable: t                  #session 中的key  可以输出到url监控中
+        principal-cookie-name: JSESSIONID       #cookie 中的key  可以输出到url监控中
         profileEnable: true
-        principalSessionName: user
       stat-view-servlet:
         enabled: true
-        allow: 127.0.0.1
-        deny: 192.168.252.66
+        allow: 127.0.0.1   #允许访问ip
+        deny: 192.168.252.66  #禁止访问ip
         login-username: admin
         login-password: 123456
         reset-enable: true
-        url-pattern: /druid/*
+        url-pattern: /druid/*   #监控访问目录
     url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true&autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT&allowPublicKeyRetrieval=true
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
